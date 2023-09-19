@@ -1,7 +1,17 @@
 package br.com.fiap.stocker.model;
 
+import org.springframework.http.ResponseEntity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+
+@Entity
 public class Usuario {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
     private String senha;
@@ -113,6 +123,15 @@ public class Usuario {
                 + permissao + "]";
     }
 
-    
+
+    public ResponseEntity<Usuario> get() {
+        return null;
+    }
+
+    public boolean isEmpty() {
+        return false;
+    }
+
+   
 
 }

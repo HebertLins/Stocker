@@ -1,5 +1,7 @@
 package br.com.fiap.stocker.model;
 
+import org.springframework.http.ResponseEntity;
+
 public class Produto {
     
     private int id;
@@ -123,6 +125,18 @@ public class Produto {
     public String toString() {
         return "Produto [id=" + id + ", nome=" + nome + ", qtd=" + qtd + ", preco=" + preco + ", desc=" + desc
                 + ", tipo=" + tipo + "]";
+    }
+
+
+
+    public boolean isEmpty() {
+        return false;
+    }
+
+
+
+    public ResponseEntity<Produto> get() {
+        return null;
     }
 
     

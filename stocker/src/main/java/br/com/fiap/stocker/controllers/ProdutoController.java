@@ -6,7 +6,6 @@ import br.com.fiap.stocker.model.Produto;
 import br.com.fiap.stocker.model.TipoProduto;
 
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 public class ProdutoController {
@@ -59,8 +56,22 @@ public class ProdutoController {
   }
 
   @DeleteMapping("/produto/{id}")
-  public void DeleteById(@PathVariable int id){
-    log.info("deletando o produto com id" + id);
+  public ResponseEntity<Produto> DeleteById(@PathVariable int id){
+      log.info("Deletar produto com id " + id);
+      var produtoEncontrado = produtos
+      .stream()
+      .filter( (produto) -> produto.getId() == id)
+      .findFirst()
+      .get();
+
+        if (produtoEncontrado.isEmpty()){
+          return ResponseEntity.notFound().build();
+        }
+
+        produtos.remove(produtoEncontrado.get());
+        return ResponseEntity.noContent().build();         
   }
+
+
 
 }

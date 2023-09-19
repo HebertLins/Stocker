@@ -31,3 +31,5 @@ Descrição dos endpoints de Usuario
 - 'POST'    /usuario: cadastro de usuarios
 - 'PUT'     /usuario/{id}: alterar dados de um usuario
 - 'DELETE'  /usuario/{id}: deletar um usuario específico do sistema
+
+##Codigos de Retorno
