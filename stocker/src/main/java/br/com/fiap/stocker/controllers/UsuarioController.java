@@ -15,12 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.fiap.stocker.model.Produto;
-import br.com.fiap.stocker.model.TipoProduto;
 import br.com.fiap.stocker.model.Usuario;
 import br.com.fiap.stocker.repository.UsuarioRepository;
 
@@ -41,21 +37,21 @@ public class UsuarioController {
 
     @GetMapping("/usuario/{id}")
     public ResponseEntity<Usuario> ListById(@PathVariable int id) {
-        log.info("mostrar categoria com id " + id);
+        log.info("mostrar usuario com id " + id);
         return ResponseEntity.ok(getUsuarioById(id));
 
     }
 
     @PostMapping("/usuario")
     public ResponseEntity<Usuario> Insert(@RequestBody Usuario usuario) {
-        log.info("cadastrando categoria - " + usuario);
+        log.info("cadastrando usuario - " + usuario);
         repository.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
     @PutMapping("/categorias/{id}")
     public ResponseEntity<Usuario> update(@PathVariable int id, @RequestBody Usuario usuario){
-        log.info("atualizando dados da categoria com id " + id);
+        log.info("atualizando dados da usuario com id " + id);
         getUsuarioById(id);
         usuario.setId(id);
         repository.save(usuario);
@@ -65,7 +61,7 @@ public class UsuarioController {
 
     @DeleteMapping("/usuario/{id}")
     public ResponseEntity<Object> DeleteById(@PathVariable int id){
-        log.info("apagando categoria com id " + id);
+        log.info("apagando usuario com id " + id);
         repository.delete(getUsuarioById(id));
         return ResponseEntity.noContent().build();
     }
