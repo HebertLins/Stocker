@@ -1,80 +1,33 @@
 package br.com.fiap.stocker.model;
 
-import org.springframework.http.ResponseEntity;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "TB_TP_PRODUTO", uniqueConstraints = {
+    @UniqueConstraint(name = "UK_NM_TP_PRODUTO", columnNames = {"NM_TP_PRODUTO"})
+})
 public class TipoProduto {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_TP_PRODUTO")
+    @SequenceGenerator(name = "ID_TP_PRODUTO", sequenceName = "ID_TP_PRODUTO")
+    @Column(name = "ID_TP_PRODUTO")    
     private int id;
+
+    @Column(name = "NM_TP_PRODUTO", nullable = false)
     private String nome;
-
-    
-    public TipoProduto() {
-    }
-
-
-    
-
-    public TipoProduto(int id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
-
-
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        TipoProduto other = (TipoProduto) obj;
-        if (id != other.id)
-            return false;
-        if (nome == null) {
-            if (other.nome != null)
-                return false;
-        } else if (!nome.equals(other.nome))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "TipoProduto [id=" + id + ", nome=" + nome + "]";
-    }
-
-    
-
+ 
 }
